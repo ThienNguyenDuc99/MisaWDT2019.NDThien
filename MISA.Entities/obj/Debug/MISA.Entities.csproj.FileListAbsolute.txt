@@ -1,0 +1,13 @@
+E:\WDTMisaProject2019\MISA.WDT02.NDThien\MISA.Entities\bin\Debug\MISA.Entities.dll.config
+E:\WDTMisaProject2019\MISA.WDT02.NDThien\MISA.Entities\bin\Debug\MISA.Entities.dll
+E:\WDTMisaProject2019\MISA.WDT02.NDThien\MISA.Entities\bin\Debug\MISA.Entities.pdb
+E:\WDTMisaProject2019\MISA.WDT02.NDThien\MISA.Entities\bin\Debug\EntityFramework.dll
+E:\WDTMisaProject2019\MISA.WDT02.NDThien\MISA.Entities\bin\Debug\EntityFramework.SqlServer.dll
+E:\WDTMisaProject2019\MISA.WDT02.NDThien\MISA.Entities\bin\Debug\EntityFramework.xml
+E:\WDTMisaProject2019\MISA.WDT02.NDThien\MISA.Entities\bin\Debug\EntityFramework.SqlServer.xml
+E:\WDTMisaProject2019\MISA.WDT02.NDThien\MISA.Entities\obj\Debug\MISA.Entities.csproj.CoreCompileInputs.cache
+E:\WDTMisaProject2019\MISA.WDT02.NDThien\MISA.Entities\obj\Debug\MISA.Entities.csproj.CopyComplete
+E:\WDTMisaProject2019\MISA.WDT02.NDThien\MISA.Entities\obj\Debug\MISA.Entities.dll
+E:\WDTMisaProject2019\MISA.WDT02.NDThien\MISA.Entities\obj\Debug\MISA.Entities.pdb
+E:\WDTMisaProject2019\MISA.WDT02.NDThien\MISA.Entities\obj\Debug\MISA.Entities.Migrations.Initial.resources
+E:\WDTMisaProject2019\MISA.WDT02.NDThien\MISA.Entities\obj\Debug\MISA.Entities.csproj.GenerateResource.cache

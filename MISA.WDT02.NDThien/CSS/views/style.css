@@ -1,0 +1,90 @@
+﻿body {
+   
+}
+
+.father{
+    width: 100%;
+    display:inline;
+}
+
+.Right {
+    background-color: snow;
+    position: absolute;
+    height: 100%;
+    width: 84.5%;
+    right: 0px;
+}
+
+.text-left{
+    text-align: left;
+}
+
+.settbody {
+    padding-left: 6px;
+    /*border-right: 0.5px solid #E6E6E6;
+    border-bottom: 0.1px solid #fafafa;*/
+    background: #F2F2F2;
+}
+
+.settbodyTd {
+    border-right: 0.5px solid #E6E6E6;
+    border-bottom: 0.1px solid #fafafa;
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: "----";
+    height: 24px !important;
+    padding-left: 2px;
+    font-size: 11px;
+}
+
+.selected {
+    background-color: #d7e9f4 !important;
+}
+
+.danger{
+    border: 1px solid #ff0000 !important;
+    width: 160px !important;
+}
+
+input:focus {
+    outline: 0;
+    outline-style: none;
+    outline-width: 0;
+}
+
+select:focus {
+    outline: 0;
+    outline-style: none;
+    outline-width: 0;
+}
+
+button:focus {
+    outline: 0;
+    outline-style: none;
+    outline-width: 0;
+}
+
+.std {
+    position: absolute;
+    left: 255px !important;
+    width: 55px !important;
+    width: 50px !important;
+}
+
+.table-content{
+    overflow-y: scroll;
+}
+
+button{
+    cursor: pointer;
+}
+
+/*td {
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: clip;
+}*/
+
+thead{
+    font-weight: 600;
+}

@@ -1,0 +1,405 @@
+﻿.page-header {
+    width: 100%;
+    height: 55px;
+    background-color: #026b97;
+    position: relative;
+}
+
+.tiecbandao {
+    width: 200px;
+    height: 32px;
+    background-color: #00577b;
+    position: absolute;
+    left: 10px;
+    top: 10.5px;
+    
+}
+
+.tiecbandao-icon {
+    position: absolute;
+    right: 3px;
+    height: 17px;
+    width: 17px;
+    bottom: 7px;
+    background: url('../../Contents/Tài nguyên/default-small-arrow.png') no-repeat;
+    background-position: 0px 0px;
+   
+}
+
+.tiecbandao-content {
+    position: absolute;
+    color: snow;
+    top: 4px;
+    left: 10px;
+    font-size:14px;
+}
+
+.tiengviet {
+    width: 170px;
+    height: 32px;
+    background-color: #00577b;
+    position: absolute;
+    right: 340px;
+    top: 10.5px;
+}
+
+.tiengviet-icon {
+    position: absolute;
+    right: 3px;
+    height: 17px;
+    width: 17px;
+    bottom: 7px;
+    background: url('../../Contents/Tài nguyên/default-small-arrow.png') no-repeat;
+    background-position: 0px 0px;
+}
+
+.tiengviet-content {
+    position: absolute;
+    color: snow;
+    top: 4px;
+    left: 10px;
+    font-size: 14px;
+}
+
+.page-header .thongbao {
+    position: absolute;
+    top: 10.5px;
+    right: 290px;
+    width: 30px;
+    height: 30px;
+    background-image: url('../../Contents/Bt0ef7WCUAM9qkB.jpg');
+    background-size: 44px 44px;
+    background-position: -9px -3px;
+}
+
+.page-header .help {
+    position: absolute;
+    top: 0px;
+    right: 225px;
+    width: 65px;
+    height: 55px;
+    background: url('../../Contents/Tài nguyên/ic_support.svg') no-repeat;
+    background-size: 65px 55px;
+    
+}
+
+.user{
+    position: absolute;
+    right: 10px;
+    width: 200px;
+    height: 28px;
+    top: 13.5px;
+    display: flex;
+}
+
+    .user .user-icon {
+        border-radius: 14px;
+        width: 28px;
+        height: 28px;
+        background-image: url('../../Contents/images/Image.png');
+        background-size: cover;
+    }
+
+    .user-content{
+        padding-left: 7px;
+        color: snow;
+    }
+
+    .user .user-icon2 {
+        position: absolute;
+        right: 7px;
+        height: 17px;
+        width: 17px;
+        bottom: 7px;
+        background: url('../../Contents/Tài nguyên/default-small-arrow.png') no-repeat;
+        background-position: 0px 0px;
+    }
+
+.page-header2 {
+    position: relative;
+    width: 100%;
+    height: 47px;
+    background-color: #ffffff;
+   
+}
+
+.page-header2-right {
+    height: 47px;
+    width: 220px;
+    background-color: #ffffff;
+    display: flex;
+    position: absolute;
+}
+
+.page-header2-right .danhmuc {
+    position: absolute;
+    top: 9px;
+    left: 5px;
+    font-size: 18.5px;
+    font-weight: 500;
+ }
+
+    .page-header2-right .danhmuc-icon {
+        width: 11px;
+        height: 11px;
+        background-color: #026b97;
+        position: absolute;
+        left: 100px;
+        top: 18px;
+        background-image: url('../../Contents/Tài nguyên/tool-sprites.png');
+        background-position: -3px -130px;
+    }
+
+    .page-header2-right .khachhang {
+        position: absolute;
+        left: 120px;
+        top: 12px;
+        color: #026b97;
+        font-size: 15px;
+    }
+
+.page-header2-center{
+    top: 10px;
+    height: 28px;
+    width: 170px;
+    position: absolute;
+    right: 130px;
+    font-size: 13.5px;
+    border: 1px solid #808080;
+    border-radius: 2px;
+    padding-top: 2px;
+    padding-left: 7px;
+}
+
+.page-header2-center:hover {
+    background-color: #026b97;
+    color: snow;
+}
+    .page-header2-left {
+    top: 10px;
+    height: 28px;
+    width: 100px;
+    position: absolute;
+    right: 10px;
+    font-size: 13.5px;
+    border: 1px solid #808080;
+    padding-left: 3px;
+    border-radius: 2px;
+}
+
+.page-header2-left:hover {
+    background-color: #026b97;
+    color: snow;
+}
+
+.page-header2-left-icon {
+    width: 28px;
+    height: 28px;
+    background: url('../../Contents/Tài nguyên/viewEmail.png') no-repeat;
+    background-position: 4px 4px
+
+}
+
+.page-header2-left-content {
+    position: absolute;
+    top: 1.5px;
+    left: 32px;
+}
+
+
+
+
+.toolbar {
+    width: 100%;
+    height: 27px;
+    background-color: #A4A4A4;
+    display: flex;
+    position: relative;
+}
+
+    .toolbar .toolbar-item {
+        background-color: #A4A4A4;
+    }
+
+    .toolbar .toolbar-item .icon {
+        position: absolute;
+        left: 5px;
+        top: 4px;
+        width: 22px;
+        height: 22px;
+      
+    }
+
+    .toolbar .toolbar-item .content {
+        position: absolute;
+        left: 31px;
+        top: 3px;
+        width: auto;
+        height: 16px;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .toolbar .add {
+        position: absolute;
+        width: 80px;
+        height: 100%;
+       
+        top: 0px;      
+        border: 0px;
+        padding: 0px;
+    }
+
+        .toolbar .add .icon {
+            background: url('../../Contents/Tài nguyên/IconSprite.png') no-repeat;
+            background-position: 3px -2511px;
+        }
+        
+        .toolbar .add .content {
+           
+            
+        }
+
+    .toolbar .duplicate {
+        position: absolute;
+        width: 105px;
+        height: 100%;
+       
+        top: 0px;
+        border: 0px;
+        padding: 0px;
+        left: 80px;
+    }
+
+        .toolbar .duplicate .icon {
+            background: url(../../Contents/images/common-icon.png);
+            background-position: -951px -2575px;
+        }
+
+        .toolbar .duplicate .content {
+            
+        }
+
+    .toolbar .edit {
+        position: absolute;
+        width: 70px;
+        height: 100%;
+        top: 0px;
+        border: 0px;
+        padding: 0px;
+        left: 185px;
+    }
+
+        .toolbar .edit .icon {
+            background: url('../../Contents/Tài nguyên/Edit16.png') no-repeat;
+            background-position: 3px 3px;
+        }
+
+    .toolbar .delete {
+        position: absolute;
+        width: 70px;
+        height: 100%;
+        top: 0px;
+        border: 0px;
+        padding: 0px;
+        left: 255px;
+    }
+
+        .toolbar .delete .icon {
+            width: 16px;
+            height: 16px;
+            background: url('../../Contents/Tài nguyên/IconSprite.png') no-repeat;
+            background-position: 3px -2678px;
+        }
+
+    .toolbar .reload {
+        position: absolute;
+        width: 70px;
+        height: 100%;
+        top: 0px;
+        border: 0px;
+        padding: 0px;
+        left: 325px;
+    }
+
+        .toolbar .reload .icon {
+            height: 17px;
+            background: url('../../Contents/Tài nguyên/IconSprite.png') no-repeat;
+            background-position: 0px -2584px;
+        }
+
+    .toolbar .download {
+        position: absolute;
+        width: 110px;
+        height: 100%;
+        top: 0px;
+        border: 0px;
+        padding: 0px;
+        left: 395px;
+    }
+
+        .toolbar .download .icon {
+            height: 17px;
+            background: url('../../Contents/Tài nguyên/Import16.png') no-repeat;
+            background-position: 0px 2px;
+        }
+
+    .toolbar .upload {
+        position: absolute;
+        width: 105px;
+        height: 100%;
+        top: 0px;
+        border: 0px;
+        padding: 0px;
+        left: 505px;
+    }
+
+        .toolbar .upload .icon {
+           
+            background: url('../../Contents/Tài nguyên/excel_97_24.png') no-repeat;
+            background-position: 0px 2px;
+        }
+    .toolbar .gopkhachhang {
+        position: absolute;
+        width: 145px;
+        height: 100%;
+        top: 0px;
+        border: 0px;
+        padding: 0px;
+        left: 610px;
+    }
+
+        .toolbar .gopkhachhang .icon {
+            background: url('../../Contents/Tài nguyên/ic_GopKhachHang.png') no-repeat;
+            background-position: 0px 2px;
+        }
+
+    .toolbar .help {
+        position: absolute;
+        width: 80px;
+        height: 100%;
+        top: 0px;
+        border: 0px;
+        padding: 0px;
+        left: 755px;
+    }
+
+        .toolbar .help .icon {
+            height: 18px;
+            width: 18px;
+            background: url('../../Contents/Tài nguyên/icon-question.png') no-repeat;
+            background-size: cover;
+            background-position: 0px 0px;
+        }
+
+.toolbar-item:hover {
+    background-color: gray;
+    color: #ffffff;
+}
+
+
+.toolbar-item[disabled ="disabled"]:hover {
+    background-color: #A4A4A4;
+    color: #848484;
+}
+

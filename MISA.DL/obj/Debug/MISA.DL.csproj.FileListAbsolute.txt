@@ -1,0 +1,15 @@
+E:\WDTMisaProject2019\MISA.WDT02.NDThien\MISA.DL\bin\Debug\MISA.DL.dll.config
+E:\WDTMisaProject2019\MISA.WDT02.NDThien\MISA.DL\bin\Debug\MISA.DL.dll
+E:\WDTMisaProject2019\MISA.WDT02.NDThien\MISA.DL\bin\Debug\MISA.DL.pdb
+E:\WDTMisaProject2019\MISA.WDT02.NDThien\MISA.DL\bin\Debug\EntityFramework.dll
+E:\WDTMisaProject2019\MISA.WDT02.NDThien\MISA.DL\bin\Debug\EntityFramework.SqlServer.dll
+E:\WDTMisaProject2019\MISA.WDT02.NDThien\MISA.DL\bin\Debug\EntityFramework.xml
+E:\WDTMisaProject2019\MISA.WDT02.NDThien\MISA.DL\bin\Debug\EntityFramework.SqlServer.xml
+E:\WDTMisaProject2019\MISA.WDT02.NDThien\MISA.DL\obj\Debug\MISA.DL.csprojAssemblyReference.cache
+E:\WDTMisaProject2019\MISA.WDT02.NDThien\MISA.DL\obj\Debug\MISA.DL.csproj.CoreCompileInputs.cache
+E:\WDTMisaProject2019\MISA.WDT02.NDThien\MISA.DL\obj\Debug\MISA.DL.csproj.CopyComplete
+E:\WDTMisaProject2019\MISA.WDT02.NDThien\MISA.DL\obj\Debug\MISA.DL.dll
+E:\WDTMisaProject2019\MISA.WDT02.NDThien\MISA.DL\obj\Debug\MISA.DL.pdb
+E:\WDTMisaProject2019\MISA.WDT02.NDThien\MISA.DL\bin\Debug\MISA.Entities.dll
+E:\WDTMisaProject2019\MISA.WDT02.NDThien\MISA.DL\bin\Debug\MISA.Entities.pdb
+E:\WDTMisaProject2019\MISA.WDT02.NDThien\MISA.DL\bin\Debug\MISA.Entities.dll.config

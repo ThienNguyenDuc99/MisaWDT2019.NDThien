@@ -1,0 +1,205 @@
+﻿.page-division{
+    position:absolute;
+    bottom: 0px;
+    background-color: #E6E6E6;
+    width: 100%;
+    height: 40px;
+    border-top: 1px solid #D8D8D8;
+}
+
+    .page-division button {
+        border: 1px solid #026b97;
+        padding: 0px;
+        background-color: #ffffff;
+        border-radius: 3px;
+    }
+
+        .page-division button[disabled ="disabled"] {
+            border: 2px solid #D8D8D8;           
+            /*padding: 0px;
+            background-color: #ffffff;
+            border-radius: 3px;*/
+        }
+
+.page-first {
+    width: 30px;
+    height: 70%;
+    top: 15%;
+    position: absolute;
+    background: url('../../Contents/Tài nguyên/page-first.png') no-repeat;
+    left: 10px;
+    background-position: 6px 4px;
+}
+.page-prev {
+    width: 25px;
+    height: 70%;
+    top: 15%;
+    position: absolute;
+    background: url('../../Contents/Tài nguyên/page-prev.png') no-repeat;
+    left: 40px;
+    background-position: 4px 4px;
+}
+
+.three {
+    width: 50px;
+    height: 70%;
+    top: 15%;
+    position: absolute;
+    padding-left: 5px;
+    left: 65px;
+}
+
+.four {
+    width: 30px;
+    height: 70%;
+    top: 15%;
+    position: absolute;
+    left: 125px;
+    border: 1px solid #026b97;
+    padding-left: 5px;
+}
+
+.five {
+    padding-left: 8px;
+    width: 65px;
+    height: 70%;
+    top: 15%;
+    position: absolute;
+    left: 155px;
+}
+
+.page-next {
+    width: 30px;
+    height: 70%;
+    top: 15%;
+    position: absolute;
+    background: url('../../Contents/Tài nguyên/page-next.png') no-repeat;
+    left: 220px;
+    background-position: 6px 4px;
+}
+
+.page-last {
+    width: 30px;
+    height: 70%;
+    top: 15%;
+    position: absolute;
+    background: url('../../Contents/Tài nguyên/page-last.png') no-repeat;
+    left: 250px;
+    background-position: 6px 4px;
+}
+
+.reload-page {
+    width: 30px;
+    height: 70%;
+    top: 15%;
+    position: absolute;
+    background: url('../../Contents/Tài nguyên/refresh.png') no-repeat;
+    left: 280px;
+    background-position: 6px 4px;
+}
+
+.nine {
+    width: 60px;
+    height: 70%;
+    top: 15%;
+    position: absolute;
+    left: 310px;
+    border: 1px solid #026b97;
+}
+
+.ten {
+    width: 240px;
+    height: 70%;
+    top: 15%;
+    position: absolute;
+    right: 10px;
+    text-align: center;
+}
+
+.table-content {
+    width: 100%;
+    background-color: #ffffff;
+    height: 72%;
+    border-top: 1px solid #ffffff;
+}
+
+
+.main-table thead {
+    width: 100%;
+    border-bottom: 2px solid snow;
+}
+
+
+    .main-table thead th {
+        width: 6.3%;
+        background-color: #E6E6E6;
+        font-size: 11px;
+        font-weight: 600;
+        border-right: 0.5px solid #D8D8D8;
+        height: 55px;
+        position: sticky;
+        top: 0;
+    }
+
+        .main-table thead th .on {
+            height: 50%;
+            line-height: 27.5px;
+            text-align: center;
+            font-size: 10px;
+            font-weight:600;
+        }
+
+    .main-table thead th .under {
+       display: flex;
+       height: 50%;
+    }
+        .main-table thead th .on1 {
+            height: 55%;
+            line-height: 27.5px;
+            text-align: center;
+            
+        }
+        .main-table thead th .under1 {
+            display: flex;
+            background-color: #ffffff;
+           height: 45%;
+           width: 100%;
+           border: 0px;
+        }
+
+.under1 .icon {
+    height: 17px;
+    width: 17px;
+    background: url('../../Contents/Tài nguyên/trigger.png') no-repeat;
+    background-position: 0px 0px;
+   
+}
+.main-table thead th button {
+    width: 26%;
+    height: 22.5px;
+    background-color: snow;
+    margin-top: 3.5px;
+    padding: 0px;
+    border: 0px;
+}
+
+
+        .main-table thead th input {
+            height: 23px;
+            width: 74%;
+            background-color: #ffffff;
+            font-size: 12px;
+            font-weight: 500;
+            border: 0;
+            padding: 0px;
+            margin-top: 3px;
+            margin-left: 1px;
+        }
+
+#pageSize{
+    cursor: pointer;
+}
+
+#pageSize .opn{
+    cursor: pointer;
+}

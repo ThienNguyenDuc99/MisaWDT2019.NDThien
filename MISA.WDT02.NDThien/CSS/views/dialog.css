@@ -1,0 +1,503 @@
+﻿/*
+    Dialog thêm mới, sửa, nhân bản
+*/
+
+.dialog {
+    width: 690px;
+    height: 350px;
+    /*display: none;*/
+    border: 3px solid #026b97;
+    border-bottom: 7px;
+    display: block;
+    background-color: #F2F2F2;
+    /*background-color: #FAFAFA;*/
+    position: fixed;
+    left: 25%;
+    top: 17%;
+    display: none;
+}
+
+.dialog-add-top {
+    padding-left: 12px;
+    position: absolute;
+    top: 0px;
+    height: 30px;
+    background-color: #026b97;
+    /*background-color: snow;*/
+    width: 100%;
+    color: snow;
+    font-weight: 500;
+    font-size: 16.5px;
+    display: flex;
+}
+
+.dialog .title{
+    width: 100px;
+}
+
+.dauX {
+    position: absolute;
+    width: 20px;
+    height:20px;
+    background-color: snow;
+    right: 7px;
+    /*left: 325px;*/
+    top: 3px;
+    border-radius: 20px;
+}
+
+.dauX .icon {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    right: 0px;
+    top: 0px;
+    background: url('../../Contents/images/cancel-blue.png') no-repeat;
+    background-position: 5px 5px;
+}
+
+
+.dialog-add-center {
+    height: 80%;
+    position: absolute;
+    top: 30px;
+    display: block;
+    width: 675px;
+   
+}
+
+
+.dialog-component {
+    height: 25px;
+    display: flex;
+    width: 100%;
+    margin-top:3px;
+}
+
+.dialog-component-child {
+    position: relative;
+    height: 20px;
+    width: 50%;
+    
+}
+
+
+    .dialog-component-child .right {
+        position: absolute;
+        height: 25px;
+        left: 5px;
+        width: 150px;
+        font-size: 14px;
+        padding-left: 7px;
+        font-weight:500;
+    }
+
+.dialog-add-center .dialog-component-child input {
+    position: absolute;
+    left: 150px;
+    width: 190px;
+    height: 25px;
+}
+
+
+.ghichu {
+    margin-top: 3px;
+    position: relative;
+    height: 70px;
+    left: 5px;
+    width: 100%;
+}
+
+    .ghichu .right {
+        position: absolute;
+        height: 25px;
+        left: 0px;
+        width: 80px;
+        font-size: 14px;
+        padding-left: 7px;
+        font-weight:500;
+    }
+
+#haizz {
+    position: absolute;
+    left: 145px;
+    height: 55px;
+    width:527px;
+}
+
+.check{
+    margin-top: 5px;
+    position: absolute;
+    width: 105px;
+    font-size: 12px;
+    bottom:0px;
+    left: 160px;
+    font-weight:500;
+}
+
+.check input{
+   right: 107px;
+    position: absolute;
+    bottom: 0px;
+}
+
+.dialog .ip {
+    border-radius: 1px;
+    border: 0px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 7px;
+    border: 0.5px solid #D8D8D8;
+}
+
+.dialog span{
+    color: red;
+}
+
+.stupidBoy {
+    top: 1px;
+    position: absolute;
+    left: 280px;
+    background-color:#ffffff;
+    /*background: url('../../Contents/images/common-icon.png') no-repeat;*/
+    background-position: 0 -173px;
+    height: 22px;
+    width: 57px;
+    z-index:1;
+}
+
+
+
+.dialog-add-bottom {
+    position: absolute;
+    bottom: 0px;
+    height: 40px;
+    background-color: #F2F2F2;
+    width: 100%;
+    
+    border-bottom: 5px solid #026b97;
+}
+
+
+.dialog button {
+    margin-top: 3px;
+    height: 28px;
+    border: 1.2px solid #D8D8D8;
+    display: flex;
+    padding: 1px;
+    font-weight:600;
+    background-color: snow;
+    font-size: 15px;
+    margin-bottom:4px;
+}
+
+.dialog .help{
+    width: 95px;
+    position: absolute;
+    left: 13px;
+}
+
+.dialog .save {
+    width: 95px;
+    position: absolute;
+    left: 320px;
+}
+
+.dialog .save-add {
+    width: 160px;
+    position: absolute;
+    left: 420px;
+}
+
+.dialog .cancel {
+    width: 95px;
+    position: absolute;
+    left: 585px;
+}
+
+.dialog .help .content-bottom{
+    width: 50px;
+    
+    position:absolute;
+    right: 1px;
+    bottom:2.5px;
+    text-align:left;
+}
+
+.dialog .help .icon-bottom {
+    height:20px;
+    width: 20px;
+    background: url('../../Contents/Tài nguyên/icon-question.png') no-repeat;
+    position: absolute;
+    left: 15px;
+    bottom: 3px;
+    background-size: cover;
+}
+
+.dialog .save .content-bottom {
+    width: 50px;
+    position: absolute;
+    right: 1px;
+    bottom: 2.5px;
+    text-align: left;
+}
+
+.dialog .save .icon-bottom {
+    height: 20px;
+    width: 20px;
+    background: url('../../Contents/Tài nguyên/Save16.png') no-repeat;
+    position: absolute;
+    left: 15px;
+    bottom: 3.5px;
+    background-size: cover;
+}
+
+.dialog .save-add .content-bottom {
+    width: 107px;
+    position: absolute;
+    right: 1px;
+    bottom: 2.5px;
+    text-align: left;
+}
+
+.dialog .save-add .icon-bottom {
+    height: 20px;
+    width: 20px;
+    background: url('../../Contents/Tài nguyên/SaveAdd16.png') no-repeat;
+    position: absolute;
+    left: 25px;
+    bottom: 3.5px;
+    background-size: cover;
+}
+
+.dialog .cancel .content-bottom {
+    width: 50px;
+    position: absolute;
+    right: 1px;
+    bottom: 2.5px;
+    text-align: left;
+}
+
+.dialog .cancel .icon-bottom {
+    height: 20px;
+    width: 20px;
+    background: url('../../Contents/Tài nguyên/Disable16.png') no-repeat;
+    position: absolute;
+    left: 15px;
+    bottom: 3px;
+    background-size: cover;
+}
+
+
+/**
+   Dialog xóa
+*/
+
+#dialog-delete {
+    width: 400px;
+    height: 125px;
+    border: 3px solid #026b97;
+    display: none;
+    background-color: #F2F2F2;
+    position: fixed;
+    left: 37%;
+    top: 27%;
+}
+
+    #dialog-delete .dialog-delete-top {
+        padding-left: 12px;
+        padding-top: 1px;
+        position: absolute;
+        top: 0px;
+        height: 25px;
+        background-color: #026b97;
+        width: 100%;
+        color: snow;
+        font-weight: 500;
+        font-size: 14.5px;
+        display: flex;
+        text-align: left;
+    }
+
+    #dialog-delete .dialog-delete-center {
+        background-color: #F2F2F2;
+        position: absolute;
+        top: 25px;
+        height: 40%;
+        width: 100%;
+    }
+
+
+        #dialog-delete .dialog-delete-center .icon {
+            position: absolute;
+            height: 100%;
+            width: 15%;
+            background: url('../../Contents/Tài nguyên/icon-question.png') no-repeat;
+            background-position: 10px 11px;
+        }
+
+
+        #dialog-delete .dialog-delete-center .content {
+            position: absolute;
+            height: 100%;
+            width: 85%;
+            left: 15%;
+            padding-top: 5px;
+            font-size: 14px;
+            padding-right:5px;
+            font-weight: 500;
+        }
+
+    #dialog-delete .dialog-delete-bottom {
+        position: absolute;
+        top: 75px;
+        height: 36%;
+        width: 100%;
+    }
+
+    #dialog-delete button {
+        height: 24px;
+        width: 75px;
+        font-size: 14px;
+        padding-bottom: 3px;
+        padding-top: 0px;
+        font-weight: 500;
+    }
+
+
+    #dialog-delete .yes {
+        position: absolute;
+        left: 228px;
+        top: 11px;
+    }
+
+    #dialog-delete .no {
+        position: absolute;
+        left: 310px;
+        top: 11px;
+    }
+
+/**
+   Dialog xác nhận sự thay đổi
+*/
+
+   .dialog-cofirm-change {
+    width: 400px;
+    height: 125px;
+    border: 3px solid #026b97;
+    display: none;
+    background-color: #F2F2F2;
+    position: fixed;
+    left: 37%;
+    top: 27%;
+}
+
+    .dialog-cofirm-change .dialog-cofirm-change-top {
+        padding-left: 12px;
+        padding-top: 1px;
+        position: absolute;
+        top: 0px;
+        height: 25px;
+        background-color: #026b97;
+        width: 100%;
+        color: snow;
+        font-weight: 500;
+        font-size: 14.5px;
+        display: flex;
+        text-align: left;
+    }
+
+    .dialog-cofirm-change .dialog-cofirm-change-center {
+        background-color: #F2F2F2;
+        position: absolute;
+        top: 25px;
+        height: 40%;
+        width: 100%;
+    }
+
+
+    .dialog-cofirm-change .dialog-cofirm-change-center .icon {
+        position: absolute;
+        height: 100%;
+        width: 15%;
+        background: url('../../Contents/Tài nguyên/icon-question.png') no-repeat;
+        background-position: 10px 11px;
+    }
+
+
+    .dialog-cofirm-change .dialog-cofirm-change-center .content {
+        position: absolute;
+        height: 100%;
+        width: 85%;
+        left: 15%;
+        padding-top: 14px;
+        font-size: 14px;
+        padding-right: 5px;
+        font-weight: 500;
+        
+    }
+
+    .dialog-cofirm-change .dialog-cofirm-change-bottom {
+        position: absolute;
+        top: 75px;
+        height: 36%;
+        width: 100%;
+    }
+
+    .dialog-cofirm-change button {
+        height: 24px;
+        width: 75px;
+        font-size: 14px;
+        padding-bottom: 3px;
+        padding-top: 0px;
+        font-weight: 500;
+    }
+
+
+    .dialog-cofirm-change .yes {
+        position: absolute;
+        left: 150px;
+        top: 11px;
+    }
+
+    .dialog-cofirm-change .no {
+        position: absolute;
+        left: 230px;
+        top: 11px;
+    }
+
+    .dialog-cofirm-change .cancel {
+        position: absolute;
+        left: 310px;
+        top: 11px;
+    }
+
+
+
+.icon-danger {
+    top: 3px;
+    position: absolute;
+    left: 315px;
+    background-image: url(../../Contents/images/exclamation.png);
+    background-position: 0 -175px;
+    height: 18px;
+    width: 17px;
+    z-index: 1;
+    display: none;
+}
+
+.danger-content {
+    background-color: cornflowerblue;
+    font-size: 12px;
+    position: absolute;
+    left: 342px;
+    top: 2px;
+    width: 120px;
+    height: auto;
+    display: none;
+    padding-top: 1px;
+    padding-bottom: 2px;
+    padding-left: 5px;
+    border-radius: 4px;
+    z-index: 1;
+}
