@@ -50,6 +50,7 @@ namespace MISA.DL
             var item = db.Customers.Where(p => p.customerId == refitem.customerId).FirstOrDefault();
             item.customerId = refitem.customerId;
             item.customerName = refitem.customerName;
+            item.customerGroup = refitem.customerGroup;
             item.phone = refitem.phone;
             item.company = refitem.company;
             item.taxCode = refitem.taxCode;

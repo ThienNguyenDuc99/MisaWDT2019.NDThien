@@ -8,7 +8,7 @@
 }
 
 .Right {
-    background-color: snow;
+    background-color: #ffffff;
     position: absolute;
     height: 100%;
     width: 84.5%;
@@ -23,7 +23,7 @@
     padding-left: 6px;
     /*border-right: 0.5px solid #E6E6E6;
     border-bottom: 0.1px solid #fafafa;*/
-    background: #F2F2F2;
+    background: #f2f2f2;
 }
 
 .settbodyTd {
@@ -32,9 +32,9 @@
     cursor: pointer;
     overflow: hidden;
     text-overflow: "----";
-    height: 24px !important;
+    height: 32px !important;
     padding-left: 2px;
-    font-size: 11px;
+    font-size: 14px;
 }
 
 .selected {
@@ -71,7 +71,7 @@ button:focus {
     width: 50px !important;
 }
 
-.table-content{
+.table-content {
     overflow-y: scroll;
 }
 
@@ -87,4 +87,20 @@ button{
 
 thead{
     font-weight: 600;
+}
+
+.main-table{
+    width: 150%;
+    overflow: auto;
+}
+
+.loading {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    background-color: #ffffff;
+    height: 70%;
+    background: url('../../Contents/Tài nguyên/giphy.gif') no-repeat center #ffffff;
+    background-size: 300px 300px;
+    display: none;
 }

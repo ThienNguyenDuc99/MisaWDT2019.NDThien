@@ -1,13 +1,13 @@
-﻿
-class Base {
+﻿class Base {
 
     constructor() {
         this.loadData();
         this.InitEventsBase();
         this.SetStatusButton();
-        //this.SetStatusButton1();
+        this.AddCustomerId();
+        this.NumberPage();
+        this.SetStatus();
     }
-
     InitEventsBase() {
 
     }
@@ -31,7 +31,6 @@ class Base {
     }
     /**Lấy dữ liệu phân trang */
     getData1() {
-
         var pageIndex = $('#pageIndex').val();
         var pageSize = $('#pageSize').val();
         var fakeData = [];
@@ -41,11 +40,12 @@ class Base {
             async: false,
             dataType: "json",
             beforeSend: function () {
-                $('#load-data').show();
+                $('.loading').show();
             },
             success: function (res) {
                 if (res.Success) {
                     fakeData = res.Data;
+                    
                 } else {
                     alert(res.Message);
                 }
@@ -55,8 +55,8 @@ class Base {
         });
         return fakeData;
     }
-
     loadData() {
+        var me = this;
         var data = this.getData1();
         var fields = $('th[fieldName]');
         $('.main-table tbody').empty();
@@ -64,10 +64,8 @@ class Base {
             var rowHTML = $('<tr recordID = "{0}"></tr>'.format(item["refID"]));
             $.each(fields, function (fieldIndex, fieldItem) {
                 var fieldName = fieldItem.getAttribute('fieldName');
-
                 var cls = 'text-left';
                 var value = item[fieldName];
-
                 if (value) {
                     if (fieldName) {
                         rowHTML.append('<td class = "{1}">{0}</td>'.format(value, cls));
@@ -75,27 +73,106 @@ class Base {
                 }
                 else {
                     if (fieldName === "member5food") {
-                        rowHTML.append('<td class = "{1}" style="padding-left:38px; padding-top:5px;"><input type="checkbox"></td>'.format(cls));
+                        rowHTML.append('<td class = "{1}" style="padding-left:57px; padding-top:5px;"><input type="checkbox"></td>'.format(cls));
                     }
                     else if (fieldName === "status") {
-                        rowHTML.append('<td class = "{1}" style="padding-left:33px; padding-top:5px;"><input type="checkbox"></td>'.format(cls));
+                        rowHTML.append('<td class = "{1}" style="padding-left:57px; padding-top:5px;"><input type="checkbox"></td>'.format(cls));
                     }
                     else
                         rowHTML.append('<td class = "{1}" ></td>'.format(cls));
                 }
-
+                $('.main-table tbody').append(rowHTML);
+                me.SetStatus();
             });
-            $('.main-table tbody').append(rowHTML);
-            $('.main-table tbody tr td').addClass("settbodyTd");
-            $('.main-table tbody tr').addClass("settbody");
-            $('.main-table tbody tr:odd').css("background-color", "#F2F2F2");
-            $('.main-table tbody tr:even').css("background-color", "#ffffff");
-            $('button.delete').attr('disabled', 'disabled');
-            $('button.edit').attr('disabled', 'disabled');
-            $('button.duplicate').attr('disabled', 'disabled');
-            
-
+           
         });
+        this.NumberPage();
+        setTimeout(function () { $('.loading').hide(); }, 700);
+    }
+    /**Hàm set trạng thái cho button khi không còn bản ghi nào */
+    SetStatusButton() {
+        var sizeTable = $('.main-table tbody tr').length;
+        if (sizeTable === 0) {
+            $('button.delete').attr('disabled', 'disabled');
+        }
+    }
+    /**
+     * Hàm sinh mã tự động khi thêm khách hàng
+     * Người tạo: Nguyễn Đức Thiện
+     * Thời gian: 26/08/2019
+     * */
+    AddCustomerId() {
+        var data = this.getData();
+        var listId = [];
+        var lengthTr = data.length;
+        var max = 0;
+        for (var i = 0; i < lengthTr; i++) {
+            listId[i] = data[i].customerId;
+            listId[i] = listId[i].slice(2, 7);
+            listId[i] = parseInt(listId[i]);
+            if (listId[i] > max) {
+                max = listId[i];
+            }
+        }
+        listId.sort(function (a, b) { return b - a });
+        listId.reverse();
+        var x = 0;
+        for (var i = 0; i < lengthTr; i++) {
+            if (listId[0] > 1) {
+                x = 1;
+                break;
+            }
+            if (listId[i] - i > 1) {
+                x = listId[i - 1] + 1;
+                break;
+            }
+            if (i == lengthTr - 1) {
+                x = listId[i] + 1;
+                break;
+            }
+        }
+        var stringX = x.toString();
+        if (x < 10) {
+            stringX = "KH0000" + stringX;
+        }
+        if (x < 100 && x > 9) {
+            stringX = "KH000" + stringX;
+        }
+        if (x < 1000 && x > 99) {
+            stringX = "KH00" + stringX;
+        }
+        if (x < 10000 && x > 999) {
+            stringX = "KH0" + stringX;
+        }
+        if (x < 100000 && x > 9999) {
+            stringX = "KH" + stringX;
+        }
+        return stringX;
+    }
+    /**
+     * Set trạng thái cho bảng
+     * Người tạo: Nguyễn Đức Thiện
+     * Thời gian: 24/08/2019
+     * */
+    SetStatus() {
+        $('.main-table tbody tr td').addClass("settbodyTd");
+        $('.main-table tbody tr').addClass("settbody");
+        $('.main-table tbody tr:odd').css("background-color", "#f2f2f2");
+        $('.main-table tbody tr:even').css("background-color", "#ffffff");
+        $('button.delete').attr('disabled', 'disabled');
+        $('button.edit').attr('disabled', 'disabled');
+        $('button.duplicate').attr('disabled', 'disabled');
+    }
+    /**
+     * Hàm set trạng thái cho phần phân trang
+     * Người tạo: Nguyễn Đức Thiện
+     * Thời gian: 27/08/2019
+     * */
+    NumberPage() {
+        var pageIndex = $('#pageIndex').val();
+        var pageSize = $('#pageSize').val();
+        pageIndex = parseInt(pageIndex);      
+        pageSize = parseInt(pageSize);
         var pageIndex = $('#pageIndex').val();
         var pageSize = $('#pageSize').val();
         var data1 = this.getData();
@@ -113,16 +190,11 @@ class Base {
             $('button.page-next').attr('disabled', 'disabled');
         }
         $('.page-division .five')[0].innerHTML = "trên " + lengthPage;
-        $('.page-division .ten')[0].innerHTML = "Hiển thị " + 1 + " - " + lengthPage + " trên " + lengthPage + " kết quả";
-    }
-
-    SetStatusButton() {
-        var sizeTable = $('.main-table tbody tr').length;
-        if (sizeTable === 0) {
-            $('button.delete').attr('disabled', 'disabled');
+        var numberResult = this.getData().length;
+        if (pageIndex === lengthPage) {
+            $('.page-division .ten')[0].innerHTML = "Hiển thị " + ((pageIndex - 1) * pageSize + 1) + " - " + numberResult + " trên " + numberResult + " kết quả";
         }
+        else
+        $('.page-division .ten')[0].innerHTML = "Hiển thị " + ((pageIndex - 1)*pageSize +1)   + " - " + pageIndex*pageSize + " trên " + numberResult + " kết quả";
     }
-
-    
 }
-

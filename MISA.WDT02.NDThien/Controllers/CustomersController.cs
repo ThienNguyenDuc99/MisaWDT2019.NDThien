@@ -28,7 +28,7 @@ namespace MISA.WDT02.NDThien.Controllers
         [HttpGet]
         public async Task<AjaxResult> GetRefs1([FromUri]int pageIndex, int pageSize)
         {
-            await Task.Delay(500);
+            await Task.Delay(100);
             var _ajaxResult = new AjaxResult();
             try
             {

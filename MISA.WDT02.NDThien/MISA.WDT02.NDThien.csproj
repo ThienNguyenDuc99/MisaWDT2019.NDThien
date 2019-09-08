@@ -155,7 +155,11 @@
     <Content Include="Contents\images\ui-icons_cc0000_256x240.png" />
     <Content Include="Contents\images\uncheck.png" />
     <Content Include="Contents\images\User.jpg" />
+    <Content Include="Contents\Tài nguyên\25.gif" />
+    <Content Include="Contents\Tài nguyên\30.gif" />
+    <Content Include="Contents\Tài nguyên\35.gif" />
     <Content Include="Contents\Tài nguyên\5food.png" />
+    <Content Include="Contents\Tài nguyên\805.gif" />
     <Content Include="Contents\Tài nguyên\Bt0ef7WCUAM9qkB.jpg" />
     <Content Include="Contents\Tài nguyên\cancel-invoice.png" />
     <Content Include="Contents\Tài nguyên\default-small-arrow.png" />
@@ -163,6 +167,7 @@
     <Content Include="Contents\Tài nguyên\Edit16.png" />
     <Content Include="Contents\Tài nguyên\EmployeeImage.png" />
     <Content Include="Contents\Tài nguyên\excel_97_24.png" />
+    <Content Include="Contents\Tài nguyên\giphy.gif" />
     <Content Include="Contents\Tài nguyên\icon-cost.png" />
     <Content Include="Contents\Tài nguyên\icon-deposit.png" />
     <Content Include="Contents\Tài nguyên\icon-question.png" />

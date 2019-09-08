@@ -11,3 +11,4 @@ E:\WDTMisaProject2019\MISA.WDT02.NDThien\MISA.Entities\obj\Debug\MISA.Entities.d
 E:\WDTMisaProject2019\MISA.WDT02.NDThien\MISA.Entities\obj\Debug\MISA.Entities.pdb
 E:\WDTMisaProject2019\MISA.WDT02.NDThien\MISA.Entities\obj\Debug\MISA.Entities.Migrations.Initial.resources
 E:\WDTMisaProject2019\MISA.WDT02.NDThien\MISA.Entities\obj\Debug\MISA.Entities.csproj.GenerateResource.cache
+E:\WDTMisaProject2019\MISA.WDT02.NDThien\MISA.Entities\obj\Debug\MISA.Entities.csprojAssemblyReference.cache

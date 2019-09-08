@@ -42,17 +42,5 @@ Date.prototype.formatddMMyyyy = function () {
     var month = this.getMonth() + 1 + "";
     if (month.length == 1) { month = "0" + month };
     var year = this.getFullYear();
-    //return day + '/' + month + '/' + year;
     return year + '-' + month + '-' + day;
-   // return month + '-' + day + '-' + year;
 }
-
-//Date.prototype.formatmmDDyyyy = function () {
-//    var day = this.getDate() + "";
-//    if (day.length == 1) { day = "0" + day };
-//    var month = this.getMonth() + 1 + "";
-//    if (month.length == 1) { month = "0" + month };
-//    var year = this.getFullYear();
-//    //return day + '/' + month + '/' + year;
-//    return month + '/' + day + '/' + year;
-//}

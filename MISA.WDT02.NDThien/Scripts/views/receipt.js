@@ -2,7 +2,6 @@
     var ref = new Ref();
 });
 
-
 class Ref extends Base {
     
     constructor() {
@@ -12,9 +11,8 @@ class Ref extends Base {
     InitEventsRef() {
         /*Thêm bản ghi**/
         $('.toolbar').on('click', 'button.add', this.OpenDialogAdd.bind(this));
-        $('#dialog-add').on('click', '.dauX, .cancel', this.closeDialogAdd);
+        $('#dialog-add').on('click', '.dauX, .cancel', this.CloseDialogAdd);
         $('#dialog-add').on('click', '.save', this.AddNewCustomer.bind(this));
-        $('#dialog-add').on('click', '.save-add', this.AddNewCustomer.bind(this));
         $('#dialog-add').on('click', '.save-add', this.AddNewCustomers.bind(this));
 
         /*Xóa bản ghi**/
@@ -24,7 +22,7 @@ class Ref extends Base {
 
         /*Sửa bản ghi**/
         $('.toolbar').on('click', 'button.edit', this.OpenDialogEdit.bind(this));
-        $('#dialog-edit').on('click', '.dauX, .cancel', this.closeDialogEdit.bind(this));
+        $('#dialog-edit').on('click', '.dauX, .cancel', this.CloseDialogEdit.bind(this));
         $('#dialog-edit').on('click', '.save-add', this.EditCustomer.bind(this));
         $('#dialog-edit').on('click', '.save', this.EditCustomer.bind(this));
         $('#dialog-edit').on('click', '.save-add', this.EditCustomers.bind(this));
@@ -62,8 +60,8 @@ class Ref extends Base {
         $('#dialog-edit').on('blur', 'input[property="customerId"]', this.ValidateId1); 
         
         /*Xác nhận sự thay đổi trong form**/
-        $('#edit-cofirm').on('click', 'button.yes', this.EditCustomer.bind(this));
-        $('#edit-cofirm').on('click', 'button.yes', this.YesEdit);
+       /// $('#edit-cofirm').on('click', 'button.yes', this.EditCustomer.bind(this));
+        $('#edit-cofirm').on('click', 'button.yes', this.YesEdit.bind(this));
         $('#edit-cofirm').on('click', 'button.no', this.NoEdit);
         $('#edit-cofirm').on('click', 'button.cancel', this.CancelEdit);
         $('#add-cofirm').on('click', 'button.yes', this.YesAdd.bind(this));
@@ -71,7 +69,7 @@ class Ref extends Base {
         $('#add-cofirm').on('click', 'button.cancel', this.CancelAdd);
 
         /*Phần phân trang*/
-        $(document).on('keyup', '#pageIndex', this.PagingTable.bind(this));
+        $('.page-division').on('keyup', '#pageIndex', this.PagingTable.bind(this));
         $('.page-division').on('change', '#pageSize', this.PagingTable2.bind(this));
         $('.page-division').on('click', '.page-first', this.PageFirst.bind(this));
         $('.page-division').on('click', '.page-last', this.PageLast.bind(this));
@@ -79,12 +77,9 @@ class Ref extends Base {
         $('.page-division').on('click', '.page-prev', this.PagePrev.bind(this));
     }
 
-
     PagePrev() {
         var pageIndex = $('#pageIndex').val();
-        //if (parseInt(pageIndex) > ) {
         pageIndex = parseInt(pageIndex) - 1;
-        //}
         pageIndex = pageIndex.toString();
         $('#pageIndex')[0].value = pageIndex;
         this.loadData();
@@ -128,14 +123,21 @@ class Ref extends Base {
         var lengthData = data.length;
         var pageSize = $('#pageSize').val();
         var pageIndex = $('#pageIndex').val();
+        pageIndex = parseInt(pageIndex);
+        pageSize = parseInt(pageSize);
         var lengthPage = lengthData / pageSize;
         lengthPage = Math.ceil(lengthPage);
         lengthPage = lengthPage.toString();
+        
         if (pageIndex > lengthPage) {
             $('#pageIndex')[0].value = lengthPage;
         }
+        if (pageIndex < 1) {
+            $('#pageIndex')[0].value = 1;
+        }
         if (event.keyCode === 13) {
             me.loadData();
+            debugger;
         }
     }
     /**
@@ -158,7 +160,6 @@ class Ref extends Base {
          me.loadData();
     }
 
-
     /**
      * Hàm validate trường số điện thoại
      * Người tạo: Nguyễn Đức Thiện
@@ -168,18 +169,17 @@ class Ref extends Base {
         var vl = this.value;
         var a = vl.split("");
         var l = vl.split("").length;
-        if (l != 10) {
+        var kt = 1;
+        if (l === 0) {
             $(this).addClass('danger');
             $('#dialog-add .icon-phone.icon-danger').css('display', 'block');
-            $('.danger-content.phonee')[0].innerHTML = "Số điện thoại của bạn cần có 10 ký tự và chỉ bảo gồm các chữ số từ 0 đến 9!";
         }
         else {
-            var kt = 1;
             for (var i = 0; i < l; i++) {
                 if (a[i] != "0" && a[i] != "1" && a[i] != "2" && a[i] != "3" && a[i] != "4" && a[i] != "5" && a[i] != "6" && a[i] != "7" && a[i] != "8" && a[i] != "9") {
                     $(this).addClass('danger');
                     $('#dialog-add .icon-phone.icon-danger').css('display', 'block');
-                    $('.danger-content.phonee')[0].innerHTML = "Số điện thoại của bạn cần có 10 ký tự và chỉ bảo gồm các chữ số từ 0 đến 9!";
+                    $('.danger-content.phonee')[0].innerHTML = "Số điện thoại của bạn chỉ bảo gồm các chữ số từ 0 đến 9!";
                     kt = 0;
                 }
             }
@@ -208,10 +208,21 @@ class Ref extends Base {
 
     ValidateBorn() {
         var valName = this.value;
+        valName = new Date(valName);
+        var a = typeof (valName);
+        var day = valName.getDate();
+        var month = valName.getMonth() + 1;
+        var year = valName.getFullYear();
         if (valName === "") {
             $(this).addClass('danger');
             $('#dialog-add .icon-born.icon-danger').css('display', 'block');
             $('#dialog-add .stupidBoy').addClass('std');
+        }
+        else if(year>2019 || year<1800){
+            $(this).addClass('danger');
+            $('#dialog-add .icon-born.icon-danger').css('display', 'block');
+            $('#dialog-add .stupidBoy').addClass('std');
+            $('.danger-content.bornn')[0].innerHTML = "Năm sinh lớn hơn 2019 hoặc nhỏ hơn 1800 là không hợp lê!";
         }
         else {
             $(this).removeClass('danger');
@@ -278,52 +289,7 @@ class Ref extends Base {
         $.each(inputvalues, function (index, item) {
             this.value = "";
         });
-        var data = this.getData();
-        var listId = [];
-        var lengthTr = data.length;
-        var max = 0;
-        for (var i = 0; i < lengthTr; i++) {
-            listId[i] = data[i].customerId;
-            listId[i] = listId[i].slice(2, 7);
-            listId[i] = parseInt(listId[i]);
-            if (listId[i] > max) {
-                max = listId[i];
-            }
-        }
-        listId.sort(function (a, b) { return b - a });
-        listId.reverse();
-        var x = 0; 
-        for (var i = 0; i < lengthTr; i++) {
-            if (listId[0]> 1) {
-                x = 1;
-                break;
-            }
-            if (listId[i] - i > 1) {
-                x = listId[i-1]+1;
-                break;
-            }
-            if (i == lengthTr - 1) {
-                x = listId[i] + 1;
-                break;
-            }
-        }
-        var stringX = x.toString();
-        if (x < 10) {
-            stringX = "KH0000" + stringX;
-        }
-        if (x < 100 && x>9) {
-            stringX = "KH000" + stringX;
-        }
-        if (x < 1000 && x > 99) {
-            stringX = "KH00" + stringX;
-        }
-        if (x < 10000 && x > 999) {
-            stringX = "KH0" + stringX;
-        }
-        if (x < 100000 && x > 9999) {
-            stringX = "KH" + stringX;
-        }
-        $('#dialog-add .ip')[0].value = stringX;
+        $('#dialog-add .ip')[0].value = this.AddCustomerId();
         var dialog = $('#dialog-add');
         $('.father .Right').css('opacity', '0.1');
         $('.father .nav-menu').css('opacity', '0.1');
@@ -333,9 +299,8 @@ class Ref extends Base {
         $('#dialog-add .stupidBoy').removeClass('std');
     }
 
-
     /** Đóng dialog thêm mới */
-    closeDialogAdd() {
+    CloseDialogAdd() {
         var checkvalue = 1;
         var listIp = $('#dialog-add .ip');
         for (var i = 1; i < listIp.length; i++) {
@@ -370,57 +335,61 @@ class Ref extends Base {
     YesAdd() {
         $("#add-cofirm").css('display', 'none');
         $('#dialog-add').css('display', 'block');
-        var errors = $('#dialog-add .ip.danger').length;
-        if (errors < 1) {
-            var valId = $('#dialog-add .ip[property = "customerId"]').val();
-            var valName = $('#dialog-add .ip[property = "customerName"]').val();
-            var valPhone = $('#dialog-add .ip[property = "phone"]').val();
-            var valBorn = $('#dialog-add .ip[property = "born"]').val();
-            if (valId === "") {
-                $('#dialog-add .ip[property = "customerId"]').addClass('danger');
-                $('#dialog-add .icon-id.icon-danger').css('display', 'block');
-            }
-            if (valName === "") {
-                $('#dialog-add .ip[property = "customerName"]').addClass('danger');
-                $('#dialog-add .icon-name.icon-danger').css('display', 'block');
-            }
-            if (valPhone === "") {
-                $('#dialog-add .ip[property = "phone"]').addClass('danger');
-                $('#dialog-add .icon-phone.icon-danger').css('display', 'block');
-                $('.danger-content.phonee')[0].innerHTML = "Số điện thoại của bạn cần có 10 ký tự và chỉ bảo gồm các chữ số từ 0 đến 9!";
-            }
-            if (valBorn === "") {
-                $('#dialog-add .ip[property = "born"]').addClass('danger');
-                $('#dialog-add .stupidBoy').addClass('std');
-                $('#dialog-add .icon-born.icon-danger').css('display', 'block');
-            }
+        var valId = $('#dialog-add .ip[property = "customerId"]').val();
+        var valName = $('#dialog-add .ip[property = "customerName"]').val();
+        var valPhone = $('#dialog-add .ip[property = "phone"]').val();
+        var valBorn = $('#dialog-add .ip[property = "born"]').val();
+        if (valId === "") {
+            $('#dialog-add .ip[property = "customerId"]').addClass('danger');
+            $('#dialog-add .icon-id.icon-danger').css('display', 'block');
+        }
+        if (valName === "") {
+            $('#dialog-add .ip[property = "customerName"]').addClass('danger');
+            $('#dialog-add .icon-name.icon-danger').css('display', 'block');
+        }
+        if (valPhone === "") {
+            $('#dialog-add .ip[property = "phone"]').addClass('danger');
+            $('#dialog-add .icon-phone.icon-danger').css('display', 'block');
+            $('.danger-content.phonee')[0].innerHTML = "Số điện thoại của bạn chỉ bảo gồm các chữ số từ 0 đến 9!";
+        }
+        if (valBorn === "") {
+            $('#dialog-add .ip[property = "born"]').addClass('danger');
+            $('#dialog-add .stupidBoy').addClass('std');
+            $('#dialog-add .icon-born.icon-danger').css('display', 'block');
+        }
 
-            if (valId != "" && valName != "" && valPhone != "" && valBorn != "") {
-                var me = this;
-                var listInput = $('#dialog-add [property]');
-                var object = {};
-                $.each(listInput, function (index, item) {
-                    var propertyName = item.getAttribute('property');
-                    var value = $(this).val();
-                    object[propertyName] = value;
-                });
-                $.ajax({
-                    method: 'POST',
-                    url: '/refs',
-                    dataType: "json",
-                    data: JSON.stringify(object),
-                    contentType: "application/json; charset=utf-8",
-                    success: function () {
-                        me.loadData();
-                        $('#dialog-add').css("display", "none");
-                        $('.father .Right').css('opacity', '1');
-                        $('.father .nav-menu').css('opacity', '1');
-                    },
-                    error: function () {
-                        alert('Không thêm được!');
-                    },
-                });
-            }
+        if ($('#dialog-add .ip[property = "born"]').hasClass('danger')) {
+
+        }
+        if ($('#dialog-add .ip[property = "phone"]').hasClass('danger')) {
+
+        }
+
+        if (valId != "" && valName != "" && valPhone != "" && valBorn != "" && !$('#dialog-add .ip[property = "phone"]').hasClass('danger') && !$('#dialog-add .ip[property = "born"]').hasClass('danger')) {
+            var me = this;
+            var listInput = $('#dialog-add [property]');
+            var object = {};
+            $.each(listInput, function (index, item) {
+                var propertyName = item.getAttribute('property');
+                var value = $(this).val();
+                object[propertyName] = value;
+            });
+            $.ajax({
+                method: 'POST',
+                url: '/refs',
+                dataType: "json",
+                data: JSON.stringify(object),
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    me.loadData();
+                    $('#dialog-add').css("display", "none");
+                    $('.father .Right').css('opacity', '1');
+                    $('.father .nav-menu').css('opacity', '1');
+                },
+                error: function () {
+                    alert('Không thêm được!');
+                },
+            });
         }
     }
 
@@ -440,8 +409,6 @@ class Ref extends Base {
 
     /** Hàm thực hiện chức năng cất */
     AddNewCustomer() {
-        var errors = $('#dialog-add .ip.danger').length;
-        if (errors < 1) {
             var valId = $('#dialog-add .ip[property = "customerId"]').val();
             var valName = $('#dialog-add .ip[property = "customerName"]').val();
             var valPhone = $('#dialog-add .ip[property = "phone"]').val();
@@ -457,7 +424,7 @@ class Ref extends Base {
             if (valPhone === "") {
                 $('#dialog-add .ip[property = "phone"]').addClass('danger');
                 $('#dialog-add .icon-phone.icon-danger').css('display', 'block');
-                $('.danger-content.phonee')[0].innerHTML = "Số điện thoại của bạn cần có 10 ký tự và chỉ bảo gồm các chữ số từ 0 đến 9!";
+                $('.danger-content.phonee')[0].innerHTML = "Số điện thoại của bạn chỉ bảo gồm các chữ số từ 0 đến 9!";
             }
             if (valBorn === "") {
                 $('#dialog-add .ip[property = "born"]').addClass('danger');
@@ -465,7 +432,14 @@ class Ref extends Base {
                 $('#dialog-add .icon-born.icon-danger').css('display', 'block');
             }
 
-            if (valId != "" && valName != "" && valPhone != "" && valBorn != "") {
+            if ($('#dialog-add .ip[property = "born"]').hasClass('danger')) {
+
+            }
+            if ($('#dialog-add .ip[property = "phone"]').hasClass('danger')) {
+
+            }
+
+           if (valId != "" && valName != "" && valPhone != "" && valBorn != "" && !$('#dialog-add .ip[property = "phone"]').hasClass('danger') && !$('#dialog-add .ip[property = "born"]').hasClass('danger')) {
                 var me = this;
                 var listInput = $('#dialog-add [property]');
                 var object = {};
@@ -492,12 +466,11 @@ class Ref extends Base {
                 });
             }
         }
-    }
-   /** Hàm thực hiệ chức nằng cất và thêm */
+
+   /** Hàm thực hiện chức nằng cất và thêm */
     AddNewCustomers() {    
         var me = this;
-        var errors = $('#dialog-add .ip.danger').length;
-        if (errors < 1) {
+        //if (!$('#dialog-add .ip[property = "phone"]').hasClass('danger')) {
             var valId = $('#dialog-add .ip[property = "customerId"]').val();
             var valName = $('#dialog-add .ip[property = "customerName"]').val();
             var valPhone = $('#dialog-add .ip[property = "phone"]').val();
@@ -513,7 +486,7 @@ class Ref extends Base {
             if (valPhone === "") {
                 $('#dialog-add .ip[property = "phone"]').addClass('danger');
                 $('#dialog-add .icon-phone.icon-danger').css('display', 'block');
-                $('.danger-content.phonee')[0].innerHTML = "Số điện thoại của bạn cần có 10 ký tự và chỉ bảo gồm các chữ số từ 0 đến 9!";
+                $('.danger-content.phonee')[0].innerHTML = "Số điện thoại của bạn chỉ bảo gồm các chữ số từ 0 đến 9!";
             }
             if (valBorn === "") {
                 $('#dialog-add .ip[property = "born"]').addClass('danger');
@@ -521,69 +494,41 @@ class Ref extends Base {
                 $('#dialog-add .icon-born.icon-danger').css('display', 'block');
             }
 
-            if (valId != "" && valName != "" && valPhone != "" && valBorn != "") {
+            if ($('#dialog-add .ip[property = "born"]').hasClass('danger')) {
 
-                $('#dialog-add').css("display", "none");
-                $('.father .Right').css('opacity', '1');
-                $('.father .nav-menu').css('opacity', '1');
-                setTimeout(function () {
-                    var dialog = $('#dialog-add');
-                    $('.father .Right').css('opacity', '0.1');
-                    $('.father .nav-menu').css('opacity', '0.1');
-                    dialog.css("display", "block");
-                    var inputvalues = $('#dialog-add .ip');
-                    $.each(inputvalues, function (index, item) {
-                        this.value = "";
-                    });
-                    var data = me.getData();
-                    var listId = [];
-                    var lengthTr = data.length;
-                    var max = 0;
-                    for (var i = 0; i < lengthTr; i++) {
-                        listId[i] = data[i].customerId;
-                        listId[i] = listId[i].slice(2, 7);
-                        listId[i] = parseInt(listId[i]);
-                        if (listId[i] > max) {
-                            max = listId[i];
-                        }
-                    }
-                    listId.sort(function (a, b) { return b - a });
-                    listId.reverse();
-                    var x = 0;
-                    for (var i = 0; i < lengthTr; i++) {
-                        if (listId[0] > 1) {
-                            x = 1;
-                            break;
-                        }
-                        if (listId[i] - i > 1) {
-                            x = listId[i - 1] + 1;
-                            break;
-                        }
-                        if (i == lengthTr - 1) {
-                            x = listId[i] + 1;
-                            break;
-                        }
-                    }
-                    var stringX = x.toString();
-                    if (x < 10) {
-                        stringX = "KH0000" + stringX;
-                    }
-                    if (x < 100 && x > 9) {
-                        stringX = "KH000" + stringX;
-                    }
-                    if (x < 1000 && x > 99) {
-                        stringX = "KH00" + stringX;
-                    }
-                    if (x < 10000 && x > 999) {
-                        stringX = "KH0" + stringX;
-                    }
-                    if (x < 100000 && x > 9999) {
-                        stringX = "KH0" + stringX;
-                    }
-                    $('#dialog-add .ip')[0].value = stringX;
-                }, 500);
             }
-        }
+            if ($('#dialog-add .ip[property = "phone"]').hasClass('danger')) {
+
+            }
+           if (valId != "" && valName != "" && valPhone != "" && valBorn != "" && !$('#dialog-add .ip[property = "phone"]').hasClass('danger') && !$('#dialog-add .ip[property = "born"]').hasClass('danger')) {
+                var listInput = $('#dialog-add [property]');
+                var object = {};
+                $.each(listInput, function (index, item) {
+                    var propertyName = item.getAttribute('property');
+                    var value = $(this).val();
+                    object[propertyName] = value;
+                });
+                $.ajax({
+                    method: 'POST',
+                    url: '/refs',
+                    dataType: "json",
+                    data: JSON.stringify(object),
+                    contentType: "application/json; charset=utf-8",
+                    success: function () {
+                        me.loadData();
+                        var inputvalues = $('#dialog-add .ip');
+                        $.each(inputvalues, function (index, item) {
+                            this.value = "";
+                        });
+                        setTimeout(function () {                            
+                            $('#dialog-add .ip')[0].value = me.AddCustomerId();
+                        }, 100);
+                    },
+                    error: function () {
+                        alert('Không thêm được!');
+                    },
+                });
+            }
     }
 
     /**
@@ -595,10 +540,9 @@ class Ref extends Base {
         var vl = this.value;
         var a = vl.split("");
         var l = vl.split("").length;
-        if (l != 10) {
+        if (l === 0) {
             $(this).addClass('danger');
             $('#dialog-edit .icon-phone.icon-danger').css('display', 'block');
-            $('.danger-content.phonee')[0].innerHTML = "Số điện thoại của bạn cần có 10 ký tự và chỉ bảo gồm các chữ số từ 0 đến 9!";
         }
         else {
             var kt = 1;
@@ -606,7 +550,7 @@ class Ref extends Base {
                 if (a[i] != "0" && a[i] != "1" && a[i] != "2" && a[i] != "3" && a[i] != "4" && a[i] != "5" && a[i] != "6" && a[i] != "7" && a[i] != "8" && a[i] != "9") {
                     $(this).addClass('danger');
                     $('#dialog-edit .icon-phone.icon-danger').css('display', 'block');
-                    $('.danger-content.phonee')[0].innerHTML = "Số điện thoại của bạn cần có 10 ký tự và chỉ bảo gồm các chữ số từ 0 đến 9!";
+                    $('.danger-content.phonee')[0].innerHTML = "Số điện thoại của bạn chỉ bảo gồm các chữ số từ 0 đến 9!";
                     kt = 0;
                 }
             }
@@ -635,10 +579,21 @@ class Ref extends Base {
 
     ValidateBorn1() {
         var valName = this.value;
+        valName = new Date(valName);
+        var a = typeof (valName);
+        var day = valName.getDate();
+        var month = valName.getMonth() + 1;
+        var year = valName.getFullYear();
         if (valName === "") {
             $(this).addClass('danger');
             $('#dialog-edit .icon-born.icon-danger').css('display', 'block');
             $('#dialog-edit .stupidBoy').addClass('std');
+        }
+        else if (year > 2019 || year < 1800) {
+            $(this).addClass('danger');
+            $('#dialog-edit .icon-born.icon-danger').css('display', 'block');
+            $('#dialog-edit .stupidBoy').addClass('std');
+            $('.danger-content.bornn')[0].innerHTML = "Năm sinh lớn hơn 2019 hoặc nhỏ hơn 1800 là không hợp lê!";
         }
         else {
             $(this).removeClass('danger');
@@ -664,15 +619,271 @@ class Ref extends Base {
             $('#dialog-edit .icon-id.icon-danger').css('display', 'none');
         }
     }
+   
+    /**
+     * Chức năng sửa
+     * Người thực hiện: Nguyễn Đức Thiện
+     * Ngày tạo: 24/08/2019
+     * */
+    /** Mở dialog sửa  */
+    OpenDialogEdit() {     
+        var data = this.getData1();      
+        var listTr = $('.main-table tbody tr');
+        $.each(listTr, function (index, item) {
+            if ($(item).hasClass('selected')) {  
+                $('#dialog-edit .ip[property = "customerId"]')[0].value = data[index].customerId;
+                $('#dialog-edit .ip[property = "customerName"]')[0].value = data[index].customerName;
+                $('#dialog-edit .ip[property = "phone"]')[0].value = data[index].phone;
+                $('#dialog-edit .ip[property = "customerGroup"]')[0].value = data[index].customerGroup;
+                $('#dialog-edit .ip[property = "company"]')[0].value = data[index].company;
+                $('#dialog-edit .ip[property = "taxCode"]')[0].value = data[index].taxCode;
+                $('#dialog-edit .ip[property = "andress"]')[0].value = data[index].andress;
+                $('#dialog-edit .ip[property = "email"]')[0].value = data[index].email;
+                $('#dialog-edit .ip[property = "note"]')[0].value = data[index].note;
+                var value = new Date(data[index].born);
+                $('#dialog-edit .ip[property = "born"]')[0].value = value.formatddMMyyyy();
+            }
+ 
+        });
+        var dialog = $('#dialog-edit');
+        $('.father .Right').css('opacity', '0.1');
+        $('.father .nav-menu').css('opacity', '0.1');
+        dialog.css("display", "block");
+    }
+    /** Đóng dialog sửa */
+    CloseDialogEdit() {
+        var checkinputvalue = 1;
+        var data = this.getData1();
+        var listTr = $('.main-table tbody tr');
+        $.each(listTr, function (index, item) {
+            if ($(item).hasClass('selected')) {
+                if ($('#dialog-edit .ip[property = "customerId"]')[0].value != data[index].customerId) {
+                    checkinputvalue = 0;
+                }
+                if ($('#dialog-edit .ip[property = "customerName"]')[0].value != data[index].customerName) {
+                    checkinputvalue = 0;
+                }
+                if ($('#dialog-edit .ip[property = "phone"]')[0].value != data[index].phone) {
+                    checkinputvalue = 0;
+                }
+                if ($('#dialog-edit .ip[property = "customerGroup"]')[0].value != data[index].customerGroup) {
+                    checkinputvalue = 0;
+                }
+                if ($('#dialog-edit .ip[property = "company"]')[0].value != data[index].company) {
+                    checkinputvalue = 0;
+                }
+                if ($('#dialog-edit .ip[property = "taxCode"]')[0].value != data[index].taxCode) {
+                    checkinputvalue = 0;
+                }
+                if ($('#dialog-edit .ip[property = "andress"]')[0].value != data[index].andress) {
+                    checkinputvalue = 0;
+                }
+                if ($('#dialog-edit .ip[property = "email"]')[0].value != data[index].email) {
+                    checkinputvalue = 0;
+                }
+                if ($('#dialog-edit .ip[property = "note"]')[0].value != data[index].note) {
+                    checkinputvalue = 0;
+                }
+                if ($('#dialog-edit .ip[property = "born"]')[0].value + "T00:00:00" != data[index].born) {
+                    checkinputvalue = 0;
+                }
+            }
 
+        });
+        if (checkinputvalue == 1) {
+            var dialog = $('#dialog-edit');
+            dialog.css("display", "none");
+            $('.father .Right').css('opacity', '1');
+            $('.father .nav-menu').css('opacity', '1');
+        }
+        else {
+            $("#edit-cofirm").css('display', 'block');
+            $('.dialog').css('display', 'none');
+        }
+    }
 
+    CancelEdit() {
+        $("#edit-cofirm").css('display', 'none');
+        $('#dialog-edit').css('display', 'block');
+    }
 
+    NoEdit() {
+        $("#edit-cofirm").css('display', 'none');
+        $('.father .Right').css('opacity', '1');
+        $('.father .nav-menu').css('opacity', '1');
+    }
+
+    YesEdit() {
+        $("#edit-cofirm").css('display', 'none');
+        $('#dialog-edit').css('display', 'block');
+        var valId = $('#dialog-edit .ip[property = "customerId"]').val();
+        var valName = $('#dialog-edit .ip[property = "customerName"]').val();
+        var valPhone = $('#dialog-edit .ip[property = "phone"]').val();
+        var valBorn = $('#dialog-edit .ip[property = "born"]').val();
+        if (valId === "") {
+            $('#dialog-edit .ip[property = "customerId"]').addClass('danger');
+            $('#dialog-edit .icon-id.icon-danger').css('display', 'block');
+        }
+        if (valName === "") {
+            $('#dialog-edit .ip[property = "customerName"]').addClass('danger');
+            $('#dialog-edit .icon-name.icon-danger').css('display', 'block');
+        }
+        if (valPhone === "") {
+            $('#dialog-edit .ip[property = "phone"]').addClass('danger');
+            $('#dialog-edit .icon-phone.icon-danger').css('display', 'block');
+            $('.danger-content.phonee')[0].innerHTML = "Số điện thoại của chỉ bảo gồm các chữ số từ 0 đến 9!";
+        }
+        if (valBorn === "") {
+            $('#dialog-edit .ip[property = "born"]').addClass('danger');
+            $('#dialog-edit .stupidBoy').addClass('std');
+            $('#dialog-edit .icon-born.icon-danger').css('display', 'block');
+        }
+        if ($('#dialog-edit .ip[property = "phone"]').hasClass('danger')) {
+        }
+        if ($('#dialog-edit .ip[property = "born"]').hasClass('danger')) {
+        }
+        if (valId != "" && valName != "" && valPhone != "" && valBorn != "" && !$('#dialog-edit .ip[property = "phone"]').hasClass('danger') && !$('#dialog-edit .ip[property = "born"]').hasClass('danger')) {
+            var me = this;
+            var listInput = $('#dialog-edit [property]');
+            var object = {};
+            $.each(listInput, function (index, item) {
+                var propertyName = item.getAttribute('property');
+                var value = $(this).val();
+                object[propertyName] = value;
+            });
+            $.ajax({
+                method: 'PUT',
+                url: '/refs',
+                dataType: "json",
+                data: JSON.stringify(object),
+                contentType: "application/json; charset=utf-8",
+                success: function (res) {
+                    if (res.Success) {
+                        me.loadData();
+                        $('#dialog-edit').css('display', 'none');
+                        $('.father .Right').css('opacity', '1');
+                        $('.father .nav-menu').css('opacity', '1');
+
+                    } else {
+                        alert(res.Message);
+                    }
+                }
+            });
+        }
+    }
+
+    /* Chức năng sửa**/
+    EditCustomer() {
+            var valId = $('#dialog-edit .ip[property = "customerId"]').val();
+            var valName = $('#dialog-edit .ip[property = "customerName"]').val();
+            var valPhone = $('#dialog-edit .ip[property = "phone"]').val();
+            var valBorn = $('#dialog-edit .ip[property = "born"]').val();
+            if (valId === "") {
+                $('#dialog-edit .ip[property = "customerId"]').addClass('danger');
+                $('#dialog-edit .icon-id.icon-danger').css('display', 'block');
+            }
+            if (valName === "") {
+                $('#dialog-edit .ip[property = "customerName"]').addClass('danger');
+                $('#dialog-edit .icon-name.icon-danger').css('display', 'block');
+            }
+            if (valPhone === "") {
+                $('#dialog-edit .ip[property = "phone"]').addClass('danger');
+                $('#dialog-edit .icon-phone.icon-danger').css('display', 'block');
+                $('.danger-content.phonee')[0].innerHTML = "Số điện thoại của chỉ bảo gồm các chữ số từ 0 đến 9!";
+            }
+            if (valBorn === "") {
+                $('#dialog-edit .ip[property = "born"]').addClass('danger');
+                $('#dialog-edit .stupidBoy').addClass('std');
+                $('#dialog-edit .icon-born.icon-danger').css('display', 'block');
+            }
+            if ($('#dialog-edit .ip[property = "phone"]').hasClass('danger')) {
+           }
+            if ($('#dialog-edit .ip[property = "born"]').hasClass('danger')) {
+            }
+            if (valId != "" && valName != "" && valPhone != "" && valBorn != "" && !$('#dialog-edit .ip[property = "phone"]').hasClass('danger') && !$('#dialog-edit .ip[property = "born"]').hasClass('danger')) {
+                var me = this;
+                var listInput = $('#dialog-edit [property]');
+                var object = {};
+                $.each(listInput, function (index, item) {
+                    var propertyName = item.getAttribute('property');
+                    var value = $(this).val();
+                    object[propertyName] = value;
+                });
+                $.ajax({
+                    method: 'PUT',
+                    url: '/refs',
+                    dataType: "json",
+                    data: JSON.stringify(object),
+                    contentType: "application/json; charset=utf-8",
+                    success: function (res) {
+                        if (res.Success) {
+                            me.loadData();
+                            $('#dialog-edit').css('display', 'none');
+                            $('.father .Right').css('opacity', '1');
+                            $('.father .nav-menu').css('opacity', '1');
+
+                        } else {
+                            alert(res.Message);
+                        }
+                    }
+                });
+            }
+    }
+
+/* Chức năng sửa và thêm**/
+    EditCustomers() {
+        var me = this;
+        var errors = $('#dialog-edit .ip.danger').length;
+        if (errors < 1) {
+            var valId = $('#dialog-edit .ip[property = "customerId"]').val();
+            var valName = $('#dialog-edit .ip[property = "customerName"]').val();
+            var valPhone = $('#dialog-edit .ip[property = "phone"]').val();
+            var valBorn = $('#dialog-edit .ip[property = "born"]').val();
+            if (valId === "") {
+                $('#dialog-edit .ip[property = "customerId"]').addClass('danger');
+                $('#dialog-edit .icon-id.icon-danger').css('display', 'block');
+            }
+            if (valName === "") {
+                $('#dialog-edit .ip[property = "customerName"]').addClass('danger');
+                $('#dialog-edit .icon-name.icon-danger').css('display', 'block');
+            }
+            if (valPhone === "") {
+                $('#dialog-edit .ip[property = "phone"]').addClass('danger');
+                $('#dialog-edit .icon-phone.icon-danger').css('display', 'block');
+                $('.danger-content.phonee')[0].innerHTML = "Số điện thoại của bạn chỉ bảo gồm các chữ số từ 0 đến 9!";
+            }
+            if (valBorn === "") {
+                $('#dialog-edit .ip[property = "born"]').addClass('danger');
+                $('#dialog-edit .stupidBoy').addClass('std');
+                $('#dialog-edit .icon-born.icon-danger').css('display', 'block');
+            }
+            if ($('#dialog-edit .ip[property = "phone"]').hasClass('danger')) {
+            }
+            if ($('#dialog-edit .ip[property = "born"]').hasClass('danger')) {
+            }
+            if (valId != "" && valName != "" && valPhone != "" && valBorn != "" && !$('#dialog-edit .ip[property = "phone"]').hasClass('danger') && !$('#dialog-edit .ip[property = "born"]').hasClass('danger')) {
+                $('.dialog').css("display", "none");
+                $('.father .Right').css('opacity', '1');
+                $('.father .nav-menu').css('opacity', '1');
+                var dialog = $('#dialog-add');
+                $('.father .Right').css('opacity', '0.1');
+                $('.father .nav-menu').css('opacity', '0.1');
+                dialog.css("display", "block");
+                var inputvalues = $('#dialog-add .ip');
+                $.each(inputvalues, function (index, item) {
+                    this.value = "";
+                });
+                $('#dialog-add .ip')[0].value = me.AddCustomerId();
+            }
+        }
+
+    }
 
     /** Hàm thực hiện chức năng xóa một hoặc nhiều khách hàng
-     * Người tạo: Nguyễn Đức Thiện
-     * Thời gian: 24/08/2019
-     * */
- 
+    * Người tạo: Nguyễn Đức Thiện
+    * Thời gian: 24/08/2019
+    * */
+
     OpenDialogDangerous() {
         $('.main-table tbody tr').removeAttr('select');
         var dialog = $('#dialog-delete');
@@ -680,13 +891,13 @@ class Ref extends Base {
         $('.father .Right').css('opacity', '0.1');
         $('.father .nav-menu').css('opacity', '0.1');
         var List = $('.main-table tbody tr.selected');
-        var list = $('.main-table tbody tr.selected td');      
+        var list = $('.main-table tbody tr.selected td');
         var id = list[0].innerHTML;
         var name = list[1].innerHTML;
-        if (List.length == 1 ) {
+        if (List.length == 1) {
             $('#dialog-delete .dialog-delete-center .content')[0].innerHTML = "Bạn có thực sự muốn xóa Khách hàng " + id + " - " + name + " không?";
         }
-        else {    
+        else {
             $('#dialog-delete .dialog-delete-center .content')[0].innerHTML = "Bạn có chắc chắn muốn xóa những khách hàng đã chọn không?";
 
         }
@@ -736,263 +947,11 @@ class Ref extends Base {
      * */
     ReloadData() {
         $('#pageIndex')[0].value = "1";
-        $('#pageSize')[0].value = "25";
+        $('#pageSize')[0].value = "50";
         this.loadData();
         this.SetStatusButton1();
     }
-   
-    /**
-     * Chức năng sửa
-     * Người thực hiện: Nguyễn Đức Thiện
-     * Ngày tạo: 24/08/2019
-     * */
-    /** Mở dialog sửa  */
-    OpenDialogEdit() {     
-        var data = this.getData1();      
-        var listTr = $('.main-table tbody tr');
-        $.each(listTr, function (index, item) {
-            if ($(item).hasClass('selected')) {  
-                $('#dialog-edit .ip[property = "customerId"]')[0].value = data[index].customerId;
-                $('#dialog-edit .ip[property = "customerName"]')[0].value = data[index].customerName;
-                $('#dialog-edit .ip[property = "phone"]')[0].value = data[index].phone;
-                $('#dialog-edit .ip[property = "customerGroup"]')[0].value = data[index].customerGroup;
-                $('#dialog-edit .ip[property = "company"]')[0].value = data[index].company;
-                $('#dialog-edit .ip[property = "taxCode"]')[0].value = data[index].taxCode;
-                $('#dialog-edit .ip[property = "andress"]')[0].value = data[index].andress;
-                $('#dialog-edit .ip[property = "email"]')[0].value = data[index].email;
-                $('#dialog-edit .ip[property = "note"]')[0].value = data[index].note;
-                var value = new Date(data[index].born);
-                $('#dialog-edit .ip[property = "born"]')[0].value = value.formatddMMyyyy();
-            }
- 
-        });
-        var dialog = $('#dialog-edit');
-        $('.father .Right').css('opacity', '0.1');
-        $('.father .nav-menu').css('opacity', '0.1');
-        dialog.css("display", "block");
-    }
-    /** Đóng dialog sửa */
-    closeDialogEdit() {
-        var checkinputvalue = 1;
-        var data = this.getData1();
-        var listTr = $('.main-table tbody tr');
-        $.each(listTr, function (index, item) {
-            if ($(item).hasClass('selected')) {
-                if ($('#dialog-edit .ip[property = "customerId"]')[0].value != data[index].customerId) {
-                    checkinputvalue = 0;
-                }
-                if ($('#dialog-edit .ip[property = "customerName"]')[0].value != data[index].customerName) {
-                    checkinputvalue = 0;
-                }
-                if ($('#dialog-edit .ip[property = "phone"]')[0].value != data[index].phone) {
-                    checkinputvalue = 0;
-                }
-                if ($('#dialog-edit .ip[property = "customerGroup"]')[0].value != data[index].customerGroup) {
-                    checkinputvalue = 0;
-                }
-                if ($('#dialog-edit .ip[property = "company"]')[0].value != data[index].company) {
-                    checkinputvalue = 0;
-                }
-                if ($('#dialog-edit .ip[property = "taxCode"]')[0].value != data[index].taxCode) {
-                    checkinputvalue = 0;
-                }
-                if ($('#dialog-edit .ip[property = "andress"]')[0].value != data[index].andress) {
-                    checkinputvalue = 0;
-                }
-                if ($('#dialog-edit .ip[property = "email"]')[0].value != data[index].email) {
-                    checkinputvalue = 0;
-                }
-                if ($('#dialog-edit .ip[property = "note"]')[0].value != data[index].note) {
-                    checkinputvalue = 0;
-                }
-                //var value = new Date(data[index].born);
-                //if ($('#dialog-edit .ip[property = "born"]')[0].value = value.formatddMMyyyy()) {
-                //    checkinputvalue = 0;
-                //}
-            }
 
-        });
-        if (checkinputvalue == 1) {
-            var dialog = $('#dialog-edit');
-            dialog.css("display", "none");
-            $('.father .Right').css('opacity', '1');
-            $('.father .nav-menu').css('opacity', '1');
-        }
-        else {
-            $("#edit-cofirm").css('display', 'block');
-            $('.dialog').css('display', 'none');
-        }
-    }
-
-    CancelEdit() {
-        $("#edit-cofirm").css('display', 'none');
-        $('#dialog-edit').css('display', 'block');
-    }
-
-    NoEdit() {
-        $("#edit-cofirm").css('display', 'none');
-        $('.father .Right').css('opacity', '1');
-        $('.father .nav-menu').css('opacity', '1');
-    }
-
-    YesEdit() {
-        $("#edit-cofirm").css('display', 'none');
-        $('#dialog-edit').css('display', 'none');
-        $('.father .Right').css('opacity', '1');
-        $('.father .nav-menu').css('opacity', '1');
-    }
-
-    /* Chức năng sửa**/
-    EditCustomer() {
-        var errors = $('#dialog-edit .ip.danger').length;
-        if (errors < 1) {
-            var valId = $('#dialog-edit .ip[property = "customerId"]').val();
-            var valName = $('#dialog-edit .ip[property = "customerName"]').val();
-            var valPhone = $('#dialog-edit .ip[property = "phone"]').val();
-            var valBorn = $('#dialog-edit .ip[property = "born"]').val();
-            if (valId === "") {
-                $('#dialog-edit .ip[property = "customerId"]').addClass('danger');
-                $('#dialog-edit .icon-id.icon-danger').css('display', 'block');
-            }
-            if (valName === "") {
-                $('#dialog-edit .ip[property = "customerName"]').addClass('danger');
-                $('#dialog-edit .icon-name.icon-danger').css('display', 'block');
-            }
-            if (valPhone === "") {
-                $('#dialog-edit .ip[property = "phone"]').addClass('danger');
-                $('#dialog-edit .icon-phone.icon-danger').css('display', 'block');
-                $('.danger-content.phonee')[0].innerHTML = "Số điện thoại của bạn cần có 10 ký tự và chỉ bảo gồm các chữ số từ 0 đến 9!";
-            }
-            if (valBorn === "") {
-                $('#dialog-edit .ip[property = "born"]').addClass('danger');
-                $('#dialog-edit .stupidBoy').addClass('std');
-                $('#dialog-edit .icon-born.icon-danger').css('display', 'block');
-            }
-
-            if (valId != "" && valName != "" && valPhone != "" && valBorn != "") {
-                var me = this;
-                var listInput = $('#dialog-edit [property]');
-                var object = {};
-                $.each(listInput, function (index, item) {
-                    var propertyName = item.getAttribute('property');
-                    var value = $(this).val();
-                    object[propertyName] = value;
-                });
-                $.ajax({
-                    method: 'PUT',
-                    url: '/refs',
-                    dataType: "json",
-                    data: JSON.stringify(object),
-                    contentType: "application/json; charset=utf-8",
-                    success: function (res) {
-                        if (res.Success) {
-                            me.loadData();
-                            $('#dialog-edit').css('display', 'none');
-                            $('.father .Right').css('opacity', '1');
-                            $('.father .nav-menu').css('opacity', '1');
-
-                        } else {
-                            alert(res.Message);
-                        }
-                    }
-                });
-            }
-        }
-    }
-/* Chức năng sửa và thêm**/
-
-    EditCustomers() {
-        var me = this;
-        var errors = $('#dialog-edit .ip.danger').length;
-        if (errors < 1) {
-            var valId = $('#dialog-edit .ip[property = "customerId"]').val();
-            var valName = $('#dialog-edit .ip[property = "customerName"]').val();
-            var valPhone = $('#dialog-edit .ip[property = "phone"]').val();
-            var valBorn = $('#dialog-edit .ip[property = "born"]').val();
-            if (valId === "") {
-                $('#dialog-edit .ip[property = "customerId"]').addClass('danger');
-                $('#dialog-edit .icon-id.icon-danger').css('display', 'block');
-            }
-            if (valName === "") {
-                $('#dialog-edit .ip[property = "customerName"]').addClass('danger');
-                $('#dialog-edit .icon-name.icon-danger').css('display', 'block');
-            }
-            if (valPhone === "") {
-                $('#dialog-edit .ip[property = "phone"]').addClass('danger');
-                $('#dialog-edit .icon-phone.icon-danger').css('display', 'block');
-                $('.danger-content.phonee')[0].innerHTML = "Số điện thoại của bạn cần có 10 ký tự và chỉ bảo gồm các chữ số từ 0 đến 9!";
-            }
-            if (valBorn === "") {
-                $('#dialog-edit .ip[property = "born"]').addClass('danger');
-                $('#dialog-edit .stupidBoy').addClass('std');
-                $('#dialog-edit .icon-born.icon-danger').css('display', 'block');
-            }
-
-            if (valId != "" && valName != "" && valPhone != "" && valBorn != "") {
-                $('.dialog').css("display", "none");
-                $('.father .Right').css('opacity', '1');
-                $('.father .nav-menu').css('opacity', '1');
-                setTimeout(function () {
-                    var dialog = $('#dialog-add');
-                    $('.father .Right').css('opacity', '0.1');
-                    $('.father .nav-menu').css('opacity', '0.1');
-                    dialog.css("display", "block");
-                    var inputvalues = $('#dialog-add .ip');
-                    $.each(inputvalues, function (index, item) {
-                        this.value = "";
-                    });
-                    var data = me.getData();
-                    var listId = [];
-                    var lengthTr = data.length;
-                    var max = 0;
-                    for (var i = 0; i < lengthTr; i++) {
-                        listId[i] = data[i].customerId;
-                        listId[i] = listId[i].slice(2, 7);
-                        listId[i] = parseInt(listId[i]);
-                        if (listId[i] > max) {
-                            max = listId[i];
-                        }
-                    }
-                    listId.sort(function (a, b) { return b - a });
-                    listId.reverse();
-                    var x = 0;
-                    for (var i = 0; i < lengthTr; i++) {
-                        if (listId[0] > 1) {
-                            x = 1;
-                            break;
-                        }
-                        if (listId[i] - i > 1) {
-                            x = listId[i - 1] + 1;
-                            break;
-                        }
-                        if (i == lengthTr - 1) {
-                            x = listId[i] + 1;
-                            break;
-                        }
-                    }
-                    var stringX = x.toString();
-                    if (x < 10) {
-                        stringX = "KH0000" + stringX;
-                    }
-                    if (x < 100 && x > 9) {
-                        stringX = "KH000" + stringX;
-                    }
-                    if (x < 1000 && x > 99) {
-                        stringX = "KH00" + stringX;
-                    }
-                    if (x < 10000 && x > 999) {
-                        stringX = "KH0" + stringX;
-                    }
-                    if (x < 100000 && x > 9999) {
-                        stringX = "KH0" + stringX;
-                    }
-                    $('#dialog-add .ip')[0].value = stringX;
-                }, 500);
-            }
-        }
-
-    }
-    
 
     /**
     * Hàm thiết lập trạng thái cho button-toolbar ( khi không có bản ghi nào thì một số button sẽ disable)
@@ -1012,7 +971,6 @@ class Ref extends Base {
         }
     }
 
-
     /**
      * Chức năng chọn một hàng
      * Người tạo: Nguyễn Đức Thiện
@@ -1020,18 +978,12 @@ class Ref extends Base {
      * */
     RowOnClick() {
         var row = $(this);
-        //if (row.hasClass('selected')) {
-        //    row.removeClass('selected');
-        //    row.removeAttr('select');
-        //}
-        //else {  
         $('.main-table tbody tr').removeClass("selected");
         $('.main-table tbody tr[select="select"]').addClass("selected");
         row.addClass('selected');
         $('button.delete').removeAttr('disabled');
         $('button.edit').removeAttr('disabled');
         $('button.duplicate').removeAttr('disabled');
-        // }
     }
     /**
     * Thực hiện chức năng khi chọn nhiều hàng
@@ -1045,7 +997,6 @@ class Ref extends Base {
             row.addClass('selected');
         }
     }
-
 }
 
 
