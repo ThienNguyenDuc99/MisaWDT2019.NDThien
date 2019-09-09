@@ -39,9 +39,9 @@
             url: '/refs/{0}/{1}'.format(pageIndex, pageSize),
             async: false,
             dataType: "json",
-            beforeSend: function () {
-                $('.loading').show();
-            },
+            //beforeSend: function () {
+            //    $('.loading').show();
+            //},
             success: function (res) {
                 if (res.Success) {
                     fakeData = res.Data;

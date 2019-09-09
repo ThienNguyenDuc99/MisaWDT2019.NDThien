@@ -103,4 +103,5 @@ thead{
     background: url('../../Contents/Tài nguyên/giphy.gif') no-repeat center #ffffff;
     background-size: 300px 300px;
     display: none;
+    background-position: 420px 40px;
 }

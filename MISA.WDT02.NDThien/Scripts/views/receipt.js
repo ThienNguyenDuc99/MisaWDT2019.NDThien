@@ -78,6 +78,7 @@ class Ref extends Base {
     }
 
     PagePrev() {
+        $('.loading').show();
         var pageIndex = $('#pageIndex').val();
         pageIndex = parseInt(pageIndex) - 1;
         pageIndex = pageIndex.toString();
@@ -86,6 +87,7 @@ class Ref extends Base {
     }
 
     PageNext() {
+        $('.loading').show();
         var pageIndex = $('#pageIndex').val();
         pageIndex = parseInt(pageIndex) + 1;       
         pageIndex = pageIndex.toString();
@@ -94,6 +96,7 @@ class Ref extends Base {
     }
 
     PageLast() {
+        $('.loading').show();
         var me = this;
         var data = this.getData();
         var lengthData = data.length;
@@ -107,6 +110,7 @@ class Ref extends Base {
     }
 
     PageFirst() {
+        $('.loading').show();
         var me = this;
         $('#pageIndex')[0].value = "1";
             me.loadData();
@@ -118,6 +122,7 @@ class Ref extends Base {
      * Ngày tạo: 27-08-2019
      * */
     PagingTable(event) {
+ 
         var me = this;
         var data = this.getData();       
         var lengthData = data.length;
@@ -127,8 +132,7 @@ class Ref extends Base {
         pageSize = parseInt(pageSize);
         var lengthPage = lengthData / pageSize;
         lengthPage = Math.ceil(lengthPage);
-        lengthPage = lengthPage.toString();
-        
+        lengthPage = lengthPage.toString();        
         if (pageIndex > lengthPage) {
             $('#pageIndex')[0].value = lengthPage;
         }
@@ -136,8 +140,8 @@ class Ref extends Base {
             $('#pageIndex')[0].value = 1;
         }
         if (event.keyCode === 13) {
+            $('.loading').show();
             me.loadData();
-            debugger;
         }
     }
     /**
@@ -159,7 +163,6 @@ class Ref extends Base {
         }
          me.loadData();
     }
-
     /**
      * Hàm validate trường số điện thoại
      * Người tạo: Nguyễn Đức Thiện
@@ -771,7 +774,6 @@ class Ref extends Base {
             });
         }
     }
-
     /* Chức năng sửa**/
     EditCustomer() {
             var valId = $('#dialog-edit .ip[property = "customerId"]').val();
@@ -829,7 +831,6 @@ class Ref extends Base {
                 });
             }
     }
-
 /* Chức năng sửa và thêm**/
     EditCustomers() {
         var me = this;
@@ -878,12 +879,10 @@ class Ref extends Base {
         }
 
     }
-
     /** Hàm thực hiện chức năng xóa một hoặc nhiều khách hàng
     * Người tạo: Nguyễn Đức Thiện
     * Thời gian: 24/08/2019
     * */
-
     OpenDialogDangerous() {
         $('.main-table tbody tr').removeAttr('select');
         var dialog = $('#dialog-delete');
@@ -946,6 +945,7 @@ class Ref extends Base {
      * Ngày tạo: 24/08/2019
      * */
     ReloadData() {
+        $('.loading').show();
         $('#pageIndex')[0].value = "1";
         $('#pageSize')[0].value = "50";
         this.loadData();
